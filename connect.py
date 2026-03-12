@@ -9,7 +9,7 @@ from characteristic_parser import parse_characteristic
 from utils import create_date_payload
 
 # 蓝牙配置
-DEVICE_ADDRESS = ""
+DEVICE_ADDRESS = "EB:2D:1F:42:EF:4D"
 NOTIFY_UUID = "F000EFE3-0451-4000-0000-00000000B000"
 WRITE_UUID = "F000EFE1-0451-4000-0000-00000000B000"
 

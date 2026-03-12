@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def plot_ecg_data():
-    data_path = Path("data/sport/ecg_data.npy")
+    data_path = Path("data/ecg_data.npy")
     if not data_path.exists():
         print("ECG data file not found.")
         return
