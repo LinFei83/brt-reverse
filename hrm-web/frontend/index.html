@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心率带实时监测系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>心率带实时监测系统</h1>
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="label">连接状态:</span>
+                    <span id="connection-status" class="status-value disconnected">未连接</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">工作模式:</span>
+                    <span id="device-mode" class="status-value">-</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">心率:</span>
+                    <span id="heart-rate" class="status-value">- BPM</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <button id="btn-connect" class="btn btn-primary">连接设备</button>
+                <button id="btn-disconnect" class="btn btn-secondary" disabled>断开连接</button>
+            </div>
+            
+            <div class="control-group">
+                <label>切换模式:</label>
+                <button class="btn btn-mode" data-mode="sport" disabled>运动模式</button>
+                <button class="btn btn-mode" data-mode="ecg" disabled>心电模式</button>
+                <button class="btn btn-mode" data-mode="hrv" disabled>HRV模式</button>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>心电图 (ECG)</h2>
+                    <span id="ecg-count" class="data-count">0 点</span>
+                </div>
+                <canvas id="ecg-chart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>三轴加速度</h2>
+                    <span id="acc-count" class="data-count">0 点</span>
+                </div>
+                <canvas id="acc-chart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>R-R 间期 (HRV)</h2>
+                    <span id="rri-count" class="data-count">0 点</span>
+                </div>
+                <canvas id="rri-chart"></canvas>
+            </div>
+
+            <div class="info-panel">
+                <h2>实时数据</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">步数</span>
+                        <span id="steps" class="info-value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">步频</span>
+                        <span id="cadence" class="info-value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">运动时间</span>
+                        <span id="sport-time" class="info-value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">数据包</span>
+                        <span id="packet-count" class="info-value">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>心率带实时监测系统 v1.0.0</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/websocket.js"></script>
+    <script src="/static/js/charts.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
