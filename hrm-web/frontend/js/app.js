@@ -170,16 +170,18 @@ class App {
                 chartManager.clearAll();
                 this.packetCount = 0;
                 
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                await this.updateStatus();
+                if (result.message && result.message.includes('重新连接')) {
+                    alert(result.message);
+                    await this.updateStatus();
+                } else {
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    await this.updateStatus();
+                }
             } else {
                 const error = await response.json();
                 const errorMsg = error.detail || '未知错误';
-                alert('模式切换失败: ' + errorMsg);
-                
-                if (errorMsg.includes('断开连接')) {
-                    await this.updateStatus();
-                }
+                alert('操作失败: ' + errorMsg);
+                await this.updateStatus();
             }
             
         } catch (e) {

@@ -106,7 +106,11 @@ async def set_mode(request: ModeRequest):
             message=f"已切换到 {device_manager.device_mode.mode_name} 模式"
         )
     else:
-        error_msg = "模式切换失败"
         if not device_manager.is_connected:
-            error_msg = "设备在切换过程中断开连接，请重新连接设备"
-        raise HTTPException(status_code=500, detail=error_msg)
+            return ModeResponse(
+                mode=mode,
+                success=True,
+                message=f"模式切换命令已发送，设备需要重启以应用新模式，请稍后重新连接设备"
+            )
+        else:
+            raise HTTPException(status_code=500, detail="模式切换失败，请重试")
